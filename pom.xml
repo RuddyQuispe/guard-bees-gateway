@@ -10,6 +10,7 @@
 
     <modules>
         <module>admin-management</module>
+<!--        <module>api-gateway</module>-->
         <module>inventory-management</module>
     </modules>
 

@@ -8,4 +8,4 @@ springdoc:
   swagger-ui:
     path: /
 server:
-  port: 8082
+  port: 8080
