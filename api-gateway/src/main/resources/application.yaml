@@ -7,35 +7,40 @@ spring:
         webflux:
           routes:
             - id: keycloak-auth
-              uri: http://localhost:8080
+              uri: http://keycloak:8080
               predicates:
                 - Path=/realms/**
             - id: admin_management
-              uri: http://localhost:8081
+              uri: http://admin-management:8080
               predicates:
                 - Path=/v1/admin_management/**
-                - Method=GET, POST, PUT, DELETE
+                - Method=GET,POST,PUT,DELETE
               filters:
                 - TokenRelay
             - id: inventory_management
-              uri: http://localhost:8082
+              uri: http://inventory-management:8080
               predicates:
                 - Path=/v1/inventory_management/**
-                - Method=GET, POST, PUT, DELETE
+                - Method=GET,POST,PUT,DELETE
               filters:
-                - AddRequestHeader=X-Demo-Value, true
-                - AddRequestHeader=X-Request-ID, ${random.uuid}
                 - TokenRelay
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/test-realm
-          jwk-set-uri: http://localhost:8080/realms/test-realm/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8080/realms/${KEYCLOAK_UMA_REALM:api-gateway-realm}
+          jwk-set-uri: http://keycloak:8080/realms/${KEYCLOAK_UMA_REALM:api-gateway-realm}/protocol/openid-connect/certs
+
+keycloak:
+  uma:
+    server-url: http://keycloak:8080
+    realm: ${KEYCLOAK_UMA_REALM:api-gateway-realm}
+    audience: ${KEYCLOAK_UMA_AUDIENCE:api-gateway-client}
+    cache-ttl-seconds: 30
+
 logging:
   level:
-    org.springframework.cloud: DEBUG
     org.springframework.cloud.gateway: DEBUG
-    org.springframework.cloud.gateway.route.RouteDefinitionLocator: DEBUG
+
 server:
   port: 8090

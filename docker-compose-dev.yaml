@@ -20,6 +20,7 @@ services:
       KC_DB_PASSWORD: password
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HOSTNAME: http://localhost:8080
     command: start-dev
     ports:
       - "8080:8080"
@@ -41,6 +42,9 @@ services:
     image: restaurant-api/api-gateway:0.0.1-test
     ports:
       - "8090:8090"
+    environment:
+      KEYCLOAK_UMA_REALM: api-gateway-realm
+      KEYCLOAK_UMA_AUDIENCE: api-gateway-client
     depends_on:
       - keycloak
 volumes:
