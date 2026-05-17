@@ -14,6 +14,7 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers("/realms/**").permitAll()
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)

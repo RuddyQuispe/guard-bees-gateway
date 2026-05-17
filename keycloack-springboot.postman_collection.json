@@ -1,0 +1,574 @@
+{
+  "info": {
+    "_postman_id": "cd9c999d-4407-4fe7-b425-195b8ff1487f",
+    "name": "keycloack-springboot",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12611554"
+  },
+  "item": [
+    {
+      "name": "keycloack management",
+      "item": [
+        {
+          "name": "login user by realm",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "a1c49dbc-62c2-4a4d-a536-fbf93c05746d"
+                },
+                {
+                  "key": "client_id",
+                  "value": "{{KEYCLOACK_CLIENT_ID}}",
+                  "type": "text",
+                  "uuid": "614d7b46-a5e0-4ea7-a754-bfdb7e649ea9"
+                },
+                {
+                  "key": "username",
+                  "value": "guest_user",
+                  "type": "text",
+                  "uuid": "c4c525ea-c396-4597-be18-9d930ddf8108"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text",
+                  "uuid": "95112dcc-f934-406d-bf15-2b82d0e23669"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "{{KEYCLOACK_KEY_SECRET}}",
+                  "type": "text",
+                  "uuid": "76ea9735-cc9b-4a81-9cdd-ac66fcd8003f"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{API_GATEWAY_HOST}}/realms/{{KEYCLOACK_REALM_ID}}/protocol/openid-connect/token",
+              "host": [
+                "{{API_GATEWAY_HOST}}"
+              ],
+              "path": [
+                "realms",
+                "{{KEYCLOACK_REALM_ID}}",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "refresh_token",
+                  "type": "text",
+                  "uuid": "a1c49dbc-62c2-4a4d-a536-fbf93c05746d"
+                },
+                {
+                  "key": "client_id",
+                  "value": "{{KEYCLOACK_CLIENT_ID}}",
+                  "type": "text",
+                  "uuid": "614d7b46-a5e0-4ea7-a754-bfdb7e649ea9"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "{{KEYCLOACK_KEY_SECRET}}",
+                  "type": "text",
+                  "uuid": "76ea9735-cc9b-4a81-9cdd-ac66fcd8003f"
+                },
+                {
+                  "key": "refresh_token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1YTkwOTFiNC1kMGFkLTQ2ZGItOGE2Yy01YjFkMmI0MmEwNGEifQ.eyJleHAiOjE3NzkwMzYzODEsImlhdCI6MTc3OTAzNDU4MSwianRpIjoiMTY2ZjhjNDItY2UxMi1hMThiLTQ3MWMtY2I0MWI4MWE5YjcyIiwiaXNzIjoiaHR0cDovLzE5Mi4xNjguMTAwLjk1OjgwODAvcmVhbG1zL2FwaS1nYXRld2F5LXJlYWxtIiwiYXVkIjoiaHR0cDovLzE5Mi4xNjguMTAwLjk1OjgwODAvcmVhbG1zL2FwaS1nYXRld2F5LXJlYWxtIiwic3ViIjoiMDM4MmY4ZDUtYTViNS00YmEyLThlZDgtMjNmNzVlZTAzYmZhIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFwaS1nYXRld2F5LWNsaWVudCIsInNpZCI6IjRtblNBWmtlczBTNE9GUzNDNVJJcUZLeCIsInNjb3BlIjoicm9sZXMgYWNyIHdlYi1vcmlnaW5zIGVtYWlsIGJhc2ljIHNlcnZpY2VfYWNjb3VudCBwcm9maWxlIn0.yFy73JumiA4cejOp-80q4Saut4f_2hkVutlWpV3Wt7vk4ALsyJQremTbiqgMsgJG754g2EASxTXKNuGALHzuQA",
+                  "type": "text",
+                  "uuid": "369666bf-f789-4e86-a3b3-e1e477fb311b"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{API_GATEWAY_HOST}}/realms/{{KEYCLOACK_REALM_ID}}/protocol/openid-connect/token",
+              "host": [
+                "{{API_GATEWAY_HOST}}"
+              ],
+              "path": [
+                "realms",
+                "{{KEYCLOACK_REALM_ID}}",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login user master",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "a1c49dbc-62c2-4a4d-a536-fbf93c05746d"
+                },
+                {
+                  "key": "client_id",
+                  "value": "admin-cli",
+                  "type": "text",
+                  "uuid": "614d7b46-a5e0-4ea7-a754-bfdb7e649ea9"
+                },
+                {
+                  "key": "username",
+                  "value": "admin",
+                  "type": "text",
+                  "uuid": "c4c525ea-c396-4597-be18-9d930ddf8108"
+                },
+                {
+                  "key": "password",
+                  "value": "admin",
+                  "type": "text",
+                  "uuid": "95112dcc-f934-406d-bf15-2b82d0e23669"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{HOST_KEYCLOACK}}/realms/master/protocol/openid-connect/token",
+              "host": [
+                "{{HOST_KEYCLOACK}}"
+              ],
+              "path": [
+                "realms",
+                "master",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create users",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"juan.guest\",\n    \"email\": \"juan@restaurant.com\",\n    \"firstName\": \"Juan\",\n    \"lastName\": \"Guest\",\n    \"enabled\": true,\n    \"credentials\": [\n        {\n            \"type\": \"password\",\n            \"value\": \"guest123\",\n            \"temporary\": false\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST_KEYCLOACK}}/admin/realms/{{KEYCLOACK_REALM_ID}}/users",
+              "host": [
+                "{{HOST_KEYCLOACK}}"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{KEYCLOACK_REALM_ID}}",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "find user by username",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST_KEYCLOACK}}/admin/realms/{{KEYCLOACK_REALM_ID}}/users?username=juan.guest",
+              "host": [
+                "{{HOST_KEYCLOACK}}"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{KEYCLOACK_REALM_ID}}",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "juan.guest"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "find all roles",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{KEYCLOACK_BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST_KEYCLOACK}}/admin/realms/{{KEYCLOACK_REALM_ID}}/roles",
+              "host": [
+                "{{HOST_KEYCLOACK}}"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{KEYCLOACK_REALM_ID}}",
+                "roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "assign role of user",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// path admin/realms/**/users/{USER_ID}/role-mappings/realm\n[\n    {\n        \"id\": \"1d919ddc-9994-4ccc-a826-60429f565bad\",// role id\n        \"name\": \"guest-role\"\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST_KEYCLOACK}}/admin/realms/{{KEYCLOACK_REALM_ID}}/users/f157599d-2ec0-4eb4-bf9f-71063cee60c8/role-mappings/realm",
+              "host": [
+                "{{HOST_KEYCLOACK}}"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{KEYCLOACK_REALM_ID}}",
+                "users",
+                "f157599d-2ec0-4eb4-bf9f-71063cee60c8",
+                "role-mappings",
+                "realm"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "inventory management",
+      "item": [
+        {
+          "name": "find all inventory",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_GATEWAY_HOST}}/v1/inventory_management/ingredient",
+              "host": [
+                "{{API_GATEWAY_HOST}}"
+              ],
+              "path": [
+                "v1",
+                "inventory_management",
+                "ingredient"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "save inventory",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Harina de trigo\",\n  \"stock\": 0,\n  \"enabled\": true,\n  \"unit\": \"kg\",\n  \"category_id\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_GATEWAY_HOST}}/v1/inventory_management/ingredient",
+              "host": [
+                "{{API_GATEWAY_HOST}}"
+              ],
+              "path": [
+                "v1",
+                "inventory_management",
+                "ingredient"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update inventory",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Harina de trigo\",\n  \"stock\": 0,\n  \"enabled\": true,\n  \"unit\": \"kg\",\n  \"category_id\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_GATEWAY_HOST}}/v1/inventory_management/ingredient/3",
+              "host": [
+                "{{API_GATEWAY_HOST}}"
+              ],
+              "path": [
+                "v1",
+                "inventory_management",
+                "ingredient",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "admin management",
+      "item": [
+        {
+          "name": "find user by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_GATEWAY_HOST}}/v1/admin_management/user/2",
+              "host": [
+                "{{API_GATEWAY_HOST}}"
+              ],
+              "path": [
+                "v1",
+                "admin_management",
+                "user",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "save user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"WAITER\",\n  \"nickname\": \"jperez\",\n  \"fullname\": \"Juan Pérez\",\n  \"sucursal_id\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_GATEWAY_HOST}}/v1/admin_management/user",
+              "host": [
+                "{{API_GATEWAY_HOST}}"
+              ],
+              "path": [
+                "v1",
+                "admin_management",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "save user Copy",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nickname\": \"jperez\",\n    \"fullname\": \"Juan Pérez\",\n    \"sucursal_id\": 1,\n    \"assigned_area\": \"Terraza\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_GATEWAY_HOST}}/v1/admin_management/user/661",
+              "host": [
+                "{{API_GATEWAY_HOST}}"
+              ],
+              "path": [
+                "v1",
+                "admin_management",
+                "user",
+                "661"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{KEYCLOACK_BEARER_TOKEN}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "HOST_KEYCLOACK",
+      "value": ""
+    },
+    {
+      "key": "KEYCLOACK_KEY_SECRET",
+      "value": ""
+    },
+    {
+      "key": "KEYCLOACK_CLIENT_ID",
+      "value": ""
+    },
+    {
+      "key": "KEYCLOACK_REALM_ID",
+      "value": ""
+    },
+    {
+      "key": "KEYCLOACK_BEARER_TOKEN",
+      "value": ""
+    },
+    {
+      "key": "API_GATEWAY_HOST",
+      "value": ""
+    },
+    {
+      "value": ""
+    }
+  ]
+}

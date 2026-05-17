@@ -20,7 +20,7 @@ services:
       KC_DB_PASSWORD: password
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
-      KC_HOSTNAME: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8080}
+      KC_HOSTNAME: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8090}
     command: start-dev
     ports:
       - "8080:8080"
@@ -45,7 +45,7 @@ services:
     environment:
       KEYCLOAK_UMA_REALM: api-gateway-realm
       KEYCLOAK_UMA_AUDIENCE: api-gateway-client
-      KEYCLOAK_ISSUER_URL: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8080}
+      KEYCLOAK_ISSUER_URL: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8090}
       KEYCLOAK_UMA_SERVER_URL: http://keycloak:8080
     depends_on:
       - keycloak

@@ -32,6 +32,10 @@ public class UmaAuthorizationGlobalFilter implements GlobalFilter, Ordered {
         String path = exchange.getRequest().getPath().value();
         log.info("Received request for path: {}", path);
 
+        if (path.startsWith("/realms/")) {
+            return chain.filter(exchange);
+        }
+
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return respond(exchange, HttpStatus.UNAUTHORIZED);
