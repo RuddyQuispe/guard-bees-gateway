@@ -69,9 +69,10 @@ public class UmaAuthorizationGlobalFilter implements GlobalFilter, Ordered {
 
     private String resolveScope(HttpMethod method) {
         if (HttpMethod.POST.equals(method)) return "create";
-        if (HttpMethod.PUT.equals(method) || HttpMethod.PATCH.equals(method) || HttpMethod.DELETE.equals(method))
-            return "update";
-        return "read";
+        if (HttpMethod.PUT.equals(method)) return "update";
+        if (HttpMethod.DELETE.equals(method)) return "delete";
+        if (HttpMethod.GET.equals(method)) return "read";
+        throw new IllegalArgumentException("Unsupported HTTP method: " + method);
     }
 
     private String extractJti(String token) {

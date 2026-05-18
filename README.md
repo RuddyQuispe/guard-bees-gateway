@@ -127,7 +127,7 @@ Esto genera tres imágenes locales:
 ### 4. Levantar el stack
 
 ```bash
-docker compose -f docker-compose-dev.yaml up
+docker compose -f docker-compose.yaml up
 ```
 
 Servicios disponibles:

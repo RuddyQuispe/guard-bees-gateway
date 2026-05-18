@@ -1,0 +1,53 @@
+services:
+  postgres:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: keycloak_test
+      POSTGRES_USER: keycloak_usr
+      POSTGRES_PASSWORD: keycloak_pwd
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.5.7
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_PORT: 5432
+      KC_DB_URL_DATABASE: keycloak_test
+      KC_DB_USERNAME: keycloak_usr
+      KC_DB_PASSWORD: keycloak_pwd
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: 123456
+      KC_HOSTNAME: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8090}
+    command: start-dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+  admin-management:
+    image: restaurant-api/admin-management:0.0.1-test
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+  inventory-management:
+    image: restaurant-api/inventory-management:0.0.1-test
+    ports:
+      - "8082:8080"
+    depends_on:
+      - postgres
+  api-gateway:
+    image: restaurant-api/api-gateway:0.0.1-test
+    ports:
+      - "8090:8090"
+    environment:
+      KEYCLOAK_UMA_REALM: guard-bees-gateway-realm
+      KEYCLOAK_UMA_AUDIENCE: guard-bees-gateway-project
+      KEYCLOAK_ISSUER_URL: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8090}
+      KEYCLOAK_UMA_SERVER_URL: http://keycloak:8080
+    depends_on:
+      - keycloak
+volumes:
+  postgres_data_test:

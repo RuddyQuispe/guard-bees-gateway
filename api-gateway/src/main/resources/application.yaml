@@ -28,14 +28,14 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${KEYCLOAK_ISSUER_URL:http://localhost:8090}/realms/${KEYCLOAK_UMA_REALM:api-gateway-realm}
-          jwk-set-uri: ${KEYCLOAK_UMA_SERVER_URL:http://keycloak:8080}/realms/${KEYCLOAK_UMA_REALM:api-gateway-realm}/protocol/openid-connect/certs
+          issuer-uri: ${KEYCLOAK_ISSUER_URL:http://localhost:8090}/realms/${KEYCLOAK_UMA_REALM:guard-bees-gateway-realm}
+          jwk-set-uri: ${KEYCLOAK_UMA_SERVER_URL:http://keycloak:8080}/realms/${KEYCLOAK_UMA_REALM:guard-bees-gateway-realm}/protocol/openid-connect/certs
 
 keycloak:
   uma:
     server-url: ${KEYCLOAK_UMA_SERVER_URL:http://keycloak:8080}
-    realm: ${KEYCLOAK_UMA_REALM:api-gateway-realm}
-    audience: ${KEYCLOAK_UMA_AUDIENCE:api-gateway-client}
+    realm: ${KEYCLOAK_UMA_REALM:guard-bees-gateway-realm}
+    audience: ${KEYCLOAK_UMA_AUDIENCE:guard-bees-gateway-project}
     cache-ttl-seconds: 30
 
 logging:

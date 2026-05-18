@@ -40,7 +40,7 @@
                 },
                 {
                   "key": "username",
-                  "value": "guest_user",
+                  "value": "user-reader",
                   "type": "text",
                   "uuid": "c4c525ea-c396-4597-be18-9d930ddf8108"
                 },
@@ -170,7 +170,7 @@
                 },
                 {
                   "key": "password",
-                  "value": "admin",
+                  "value": "123456",
                   "type": "text",
                   "uuid": "95112dcc-f934-406d-bf15-2b82d0e23669"
                 }
@@ -184,6 +184,66 @@
               "path": [
                 "realms",
                 "master",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "validate permission",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{KEYCLOACK_BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "urn:ietf:params:oauth:grant-type:uma-ticket",
+                  "type": "text",
+                  "uuid": "a1c49dbc-62c2-4a4d-a536-fbf93c05746d"
+                },
+                {
+                  "key": "audience",
+                  "value": "guard-bees-gateway-project",
+                  "type": "text",
+                  "uuid": "614d7b46-a5e0-4ea7-a754-bfdb7e649ea9"
+                },
+                {
+                  "key": "permission",
+                  "value": "ingredient#create",
+                  "type": "text",
+                  "uuid": "5c55c54b-5de1-4236-b217-fdca8f057c4d"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{HOST_KEYCLOACK}}/realms/{{KEYCLOACK_REALM_ID}}/protocol/openid-connect/token",
+              "host": [
+                "{{HOST_KEYCLOACK}}"
+              ],
+              "path": [
+                "realms",
+                "{{KEYCLOACK_REALM_ID}}",
                 "protocol",
                 "openid-connect",
                 "token"
@@ -231,7 +291,14 @@
           },
           "request": {
             "auth": {
-              "type": "noauth"
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{KEYCLOACK_BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
             },
             "method": "GET",
             "header": [],
@@ -245,7 +312,7 @@
               }
             },
             "url": {
-              "raw": "{{HOST_KEYCLOACK}}/admin/realms/{{KEYCLOACK_REALM_ID}}/users?username=juan.guest",
+              "raw": "{{HOST_KEYCLOACK}}/admin/realms/{{KEYCLOACK_REALM_ID}}/users?username=user-reader",
               "host": [
                 "{{HOST_KEYCLOACK}}"
               ],
@@ -258,7 +325,7 @@
               "query": [
                 {
                   "key": "username",
-                  "value": "juan.guest"
+                  "value": "user-reader"
                 }
               ]
             }
@@ -302,6 +369,54 @@
                 "realms",
                 "{{KEYCLOACK_REALM_ID}}",
                 "roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "find roles by user",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{KEYCLOACK_BEARER_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{HOST_KEYCLOACK}}/admin/realms/{{KEYCLOACK_REALM_ID}}/roles?username=user-reader",
+              "host": [
+                "{{HOST_KEYCLOACK}}"
+              ],
+              "path": [
+                "admin",
+                "realms",
+                "{{KEYCLOACK_REALM_ID}}",
+                "roles"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "user-reader"
+                }
               ]
             }
           },

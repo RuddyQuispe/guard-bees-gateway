@@ -42,11 +42,11 @@ public class KeycloakUmaClient {
     }
 
     public Mono<HttpStatus> isAuthorized(String accessToken, String jti, String permission) {
-        log.debug("Checking authorization for JTI: {}, permission: {}", jti, permission);
+        log.info("Checking authorization for JTI: {}, permission: {}", jti, permission);
         String cacheKey = jti + ":" + permission;
         HttpStatus cached = authorizationCache.getIfPresent(cacheKey);
         if (cached != null) {
-            log.debug("Cache hit for JTI: {}, permission: {}, status: {}", jti, permission, cached);
+            log.info("Cache hit for JTI: {}, permission: {}, status: {}", jti, permission, cached);
             return Mono.just(cached);
         }
         return callKeycloakUma(accessToken, permission)
@@ -64,7 +64,8 @@ public class KeycloakUmaClient {
         body.add("grant_type", UMA_GRANT_TYPE);
         body.add("audience", properties.getAudience());
         body.add("permission", permission);
-        log.debug("Calling Keycloak UMA endpoint: {}, permission: {}", tokenUrl, permission);
+        log.info("Calling Keycloak UMA endpoint: {}, permission: {}", tokenUrl, permission);
+        log.info("Request body: {}", body);
         return webClient.post()
                 .uri(tokenUrl)
                 .header("Authorization", "Bearer " + accessToken)
@@ -73,7 +74,10 @@ public class KeycloakUmaClient {
                 .exchangeToMono(response -> {
                     HttpStatus status = (HttpStatus) response.statusCode();
                     log.info("Keycloak UMA response: {}", status);
-                    return response.releaseBody().thenReturn(status);
+                    return response.bodyToMono(String.class)
+                            .defaultIfEmpty("")
+                            .doOnNext(responseBody -> log.info("Keycloak UMA body: {}", responseBody))
+                            .thenReturn(status);
                 })
                 .onErrorResume(ex -> {
                     log.error("Keycloak UMA unreachable: {}", ex.getMessage());
